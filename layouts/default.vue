@@ -55,7 +55,7 @@ const open = ref(false)
 
           <NuxtLink to="/docs" class="font-semibold text-primary-600">Docs</NuxtLink>
           <span class="text-zinc-400">/</span>
-          <span class="font-medium truncate">{{ page.title }}</span>
+          <span class="font-medium truncate">{{ page?.title || 'Docs' }}</span>
 
           <!-- 右の余白に ColorMode トグルを残す -->
           <div class="ml-auto">
