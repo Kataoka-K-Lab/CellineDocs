@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ここから下はカスタム。@tailwind より前に @layer を書かないこと */
+@layer base {
+  html { scroll-behavior: smooth; }
+}
