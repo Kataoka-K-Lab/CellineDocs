@@ -53,7 +53,6 @@ const open = ref(false)
             </svg>
           </button>
 
-          <NuxtLink to="/docs" class="font-semibold text-primary-600">Docs</NuxtLink>
           <span class="text-zinc-400">/</span>
           <span class="font-medium truncate">{{ page?.title || 'Docs' }}</span>
 
