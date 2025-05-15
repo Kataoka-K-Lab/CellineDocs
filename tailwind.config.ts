@@ -57,7 +57,31 @@ export default <Partial<Config>>{
                         '--tw-prose-kbd-shadows': theme('colors.zinc.700')
                     }
                 }
-            })
+            }),
+            fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+
+            /* 文字を “真っ黒 → ややグレー” に調整 */
+            typography: (theme) => ({
+              DEFAULT: {
+                css: {
+                  color: theme('colors.zinc[800]'),
+                  a: { color: theme('colors.blue[600]') }
+                }
+              },
+              invert: {
+                css: { color: theme('colors.zinc[100]') }
+              }
+            }),
+      
+            /* アコーディオン用キーフレーム */
+            keyframes: {
+              'acc-down': { from: { height: '0' }, to: { height: 'var(--radix-accordion-content-height)' } },
+              'acc-up':   { from: { height: 'var(--radix-accordion-content-height)' }, to: { height: '0' } }
+            },
+            animation: {
+              'acc-down': 'acc-down 200ms ease-out',
+              'acc-up':   'acc-up 200ms ease-out'
+            }
         }
     },
     plugins: [

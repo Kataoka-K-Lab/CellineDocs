@@ -3,6 +3,6 @@ title: Home
 navigation: false      # ← これでサイドバーから隠れる
 ---
 
-# Welcome
+# Celline Documentation
 
-Nuxt Content の **document-driven** モードで生成されたドキュメントです。
+> *A comprehensive guide for users and developers of **Celline** – a toolkit that automates harvesting, processing and analysing public single‑cell RNA‑seq data.*

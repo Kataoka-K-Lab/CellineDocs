@@ -1,8 +1,10 @@
+@import 'prism-themes/themes/prism-vsc-dark-plus.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ここから下はカスタム。@tailwind より前に @layer を書かないこと */
 @layer base {
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; },
+  body { @apply antialiased text-zinc-800 dark:text-zinc-100 bg-white dark:bg-zinc-900; }
 }
