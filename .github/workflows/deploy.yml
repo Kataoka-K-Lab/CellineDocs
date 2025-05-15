@@ -2,7 +2,12 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]        # メインブランチに push したら発火
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: 'pages'
@@ -11,30 +16,41 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
+      # 1) ソースを取得
       - uses: actions/checkout@v4
 
-      - uses: npm/action-setup@v2
-        with: { version: 8 }
+      # 2) Node + npm キャッシュ
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm               # package-lock.json をキャッシュ
+          cache-dependency-path: nuxt-app/package-lock.json
 
-      - name: Install
-        run: npm install --frozen-lockfile
+      # 3) 依存インストール
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+        working-directory: nuxt-app
 
-      - name: Generate
-        run: npm generate                # .output/public を生成
+      # 4) 静的サイト生成 (.output/public)
+      - name: Generate site
+        run: npm run generate
+        working-directory: nuxt-app
 
+      # 5) 成果物をアップロード
       - uses: actions/upload-pages-artifact@v2
-        with: { path: .output/public }
+        with:
+          path: nuxt-app/.output/public
 
   deploy:
     needs: build
-    permissions:
-      pages: write
-      id-token: write
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+
     steps:
       - id: deployment
         uses: actions/deploy-pages@v2
