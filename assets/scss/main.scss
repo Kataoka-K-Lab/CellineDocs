@@ -1,0 +1,13 @@
+$docs-primary: #2563eb;
+
+html.dark {
+  --docs-primary: lighten($docs-primary, 30%);
+}
+
+.prose code {
+  @apply rounded px-1.5 py-0.5 bg-zinc-100 dark:bg-zinc-800 font-mono text-sm;
+}
+
+.prose pre {
+  @apply rounded-xl p-6 bg-zinc-900 text-zinc-100 overflow-auto shadow-xl;
+}
