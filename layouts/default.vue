@@ -56,10 +56,7 @@ const open = ref(false)
           <span class="text-zinc-400">/</span>
           <span class="font-medium truncate">{{ page?.title || 'Docs' }}</span>
 
-          <!-- 右の余白に ColorMode トグルを残す -->
-          <div class="ml-auto">
-            <ColorModeToggle />
-          </div>
+
         </header>
 
         <article class="prose lg:prose-lg dark:prose-invert max-w-none px-4 py-8">
@@ -67,5 +64,6 @@ const open = ref(false)
         </article>
       </main>
     </div>
+    <ColorModeToggle />
   </ContentNavigation>
 </template>
