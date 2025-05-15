@@ -1,4 +1,4 @@
-node_modules
+node_modules/*
 *.log*
 .nuxt
 .nitro
@@ -7,3 +7,4 @@ node_modules
 .data
 .env
 dist
+.data/*

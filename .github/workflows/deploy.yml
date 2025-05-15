@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main ]      # ← メインブランチ名
 
 permissions:
   contents: read
@@ -10,7 +10,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: pages
   cancel-in-progress: true
 
 jobs:
@@ -18,39 +18,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) ソースを取得
+      # 1️⃣ ソース取得
       - uses: actions/checkout@v4
 
-      # 2) Node + npm キャッシュ
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      # 2️⃣ Node + npm キャッシュ
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm               # package-lock.json をキャッシュ
+          cache: npm
           cache-dependency-path: nuxt-app/package-lock.json
 
-      # 3) 依存インストール
+      # 3️⃣ 依存インストール
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
         working-directory: nuxt-app
 
-      # 4) 静的サイト生成 (.output/public)
+      # 4️⃣ 静的サイト生成 (.output/public)
       - name: Generate site
         run: npm run generate
         working-directory: nuxt-app
 
-      # 5) 成果物をアップロード
-      - uses: actions/upload-pages-artifact@v2
+      # 5️⃣ 成果物を Pages 用 artifact としてアップロード (v3 = artifact v4 対応)
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: nuxt-app/.output/public
+          path: nuxt-app/.output/public     # 出力先
+          name: github-pages               # 既定名
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - id: deployment
-        uses: actions/deploy-pages@v2
+      # Pages を有効化（推奨）
+      - uses: actions/configure-pages@v5   # :contentReference[oaicite:1]{index=1}
+
+      # アップロード済み artifact をデプロイ (v4 = artifact v4 対応)
+      - id: deploy
+        uses: actions/deploy-pages@v4
