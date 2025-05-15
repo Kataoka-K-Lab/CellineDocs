@@ -1,0 +1,40 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]        # メインブランチに push したら発火
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: npm/action-setup@v2
+        with: { version: 8 }
+
+      - name: Install
+        run: npm install --frozen-lockfile
+
+      - name: Generate
+        run: npm generate                # .output/public を生成
+
+      - uses: actions/upload-pages-artifact@v2
+        with: { path: .output/public }
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v2
