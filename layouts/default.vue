@@ -28,5 +28,6 @@ const { page } = useContent()
         <slot />
       </article>
     </main>
+    <ColorModeToggle />
   </div>
 </template>

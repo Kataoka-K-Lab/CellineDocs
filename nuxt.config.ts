@@ -45,7 +45,8 @@
 //   }
 // })
 export default defineNuxtConfig({
-  modules: ['@nuxt/content', '@nuxtjs/tailwindcss'],
+  modules: ['@nuxt/content', '@nuxtjs/tailwindcss', '@nuxtjs/color-mode'],
+  css: ['katex/dist/katex.min.css'],
   content: {
      documentDriven: true,
      highlight: {
@@ -53,8 +54,17 @@ export default defineNuxtConfig({
         default: 'github-dark',
         dark: 'github-dark'
       },
-      preload: ['js','ts','vue','bash']
-    }
+      preload: ['js','ts','vue','bash', 'python']
+    },
+    markdown: {
+      remarkPlugins: ['remark-math'],
+      rehypePlugins: [
+        ['rehype-katex', { output: 'html', strict: false }]
+      ]
+    },
+  },
+  colorMode: {
+    classSuffix: ''               // ⚠️ 'dark' / 'light' だけを付与
   },
   /* 静的サイト生成モード */
   nitro: { preset: 'static' },           // nuxi generate → .output/public

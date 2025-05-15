@@ -3,8 +3,32 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ここから下はカスタム。@tailwind より前に @layer を書かないこと */
+/* ───────────────────────── base ───────────────────────── */
 @layer base {
-  html { scroll-behavior: smooth; },
+  html { scroll-behavior: smooth; }
   body { @apply antialiased text-zinc-800 dark:text-zinc-100 bg-white dark:bg-zinc-900; }
+}
+
+/* ───────────────────── table patch ───────────────────── */
+@layer utilities {
+  /* ダークで table が縦つぶれする問題を修正 */
+  .dark .prose thead tr,
+  .dark .prose tbody tr {              /* ❶ ここは純 CSS で OK */
+    display: table-row !important;
+  }
+
+  .dark .prose thead th,
+  .dark .prose tbody td {              /* ❷ @apply には“実在する”ユーティリティのみ */
+    @apply align-top py-2 px-4 text-zinc-200
+           border-b border-zinc-700;
+  }
+
+  .dark .prose thead th { @apply font-semibold bg-zinc-800; }
+  .dark .prose tbody tr:last-child td { border-bottom-width: 0; }
+}
+
+/* ───────────────────── KaTeX 調整 ───────────────────── */
+.prose .katex-display {
+  margin: 1.5rem 0;
+  overflow-x: auto;
 }

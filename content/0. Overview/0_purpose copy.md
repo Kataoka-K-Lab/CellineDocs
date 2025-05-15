@@ -72,7 +72,7 @@ pip install git+https://github.com/Kataoka-K-Lab/Celline.git
 
 ### 1.2  Initialise a project directory – *3 lines to start*
 
-```python [project.py]
+```py [project.py]
 from celline.interfaces import Project
 proj = Project("/data/celline_work", proj_name="brain_aging")
 proj.info()   # prints location, disk usage, config snapshot
@@ -92,7 +92,7 @@ Created structure:
 
 ### 1.3  End‑to‑end pipeline (young mouse dataset)
 
-```python
+```py
 proj.run_pipeline([
     ("download",   {"accession": "GSE173917"}),
     ("preprocess", {"min_cells": 200, "min_genes": 500}),
@@ -105,7 +105,7 @@ Each tuple is *function name, kwargs*. Progress is logged to **logs/pipeline.log
 
 ### 1.4  Dive into results
 
-```python
+```py
 adata = proj.load_count_matrix(sample="GSE173917", format="anndata")
 adata.obs.head()
 ```
@@ -154,7 +154,7 @@ celline preprocess -w /data/celline_work --min-cells 200 --min-genes 500
 
 ### 2.2  Signatures & handles
 
-```python
+```py
 handle = proj.call("preprocess", min_cells=500, wait=False)
 print(handle.status)  # queued / running / error / done
 handle.join(timeout=3600)  # block until finished
@@ -232,7 +232,7 @@ CLI subcommand auto‑generates from file name (`celline count-genes`).
 
 ### 4.3  Step‑by‑step: writing `qc_plot`
 
-```python
+```py
 # celline/functions/qc_plot.py
 from celline.functions._base import PythonFunction
 import scanpy as sc, seaborn as sns
@@ -250,13 +250,13 @@ class qc_plot(PythonFunction):
 
 Add to `functions/__init__.py`:
 
-```python
+```py
 from .qc_plot import qc_plot
 ```
 
 Write a minimal test:
 
-```python
+```py
 # tests/test_qc_plot.py
 from celline.interfaces import Project
 proj = Project("tmp")
@@ -309,7 +309,7 @@ assert (proj.workdir/"reports"/"SAMPLE_qc.pdf").exists()
 
 ### 5.2  R Tips
 
-```python
+```py
 import celline.utils.r as cr
 seurat_obj = cr.read_h5seurat("processed/SAMPLE.h5seurat")
 cr.run("DimPlot", seurat_obj, group_by="celltype")
