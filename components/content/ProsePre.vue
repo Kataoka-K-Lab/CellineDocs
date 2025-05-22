@@ -17,16 +17,13 @@ async function copy () {
 <template>
   <div class="relative my-6 group/not-prose">
     <pre
-      class="overflow-x-auto rounded-lg p-4 text-sm leading-relaxed
-             bg-zinc-900/90 text-zinc-100">
+      class="overflow-x-auto rounded-xl p-4 text-sm leading-relaxed font-mono border border-zinc-800 bg-zinc-900/75 text-zinc-100">
       <code ref="codeRef" class="block"><slot /></code>
     </pre>
 
     <button
       @click="copy"
-      class="absolute top-2 right-2 flex items-center gap-1 rounded-md
-             bg-zinc-700/70 hover:bg-zinc-700 text-xs text-white px-2 py-1
-             opacity-0 group-hover/not-prose:opacity-100 transition-opacity">
+      class="absolute top-2 right-2 flex items-center gap-1 rounded-md bg-primary-600/80 hover:bg-primary-600 text-xs text-white px-2 py-1 opacity-0 group-hover/not-prose:opacity-100 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">
       <span v-if="copied">Copied ✓</span>
       <span v-else>Copy</span>
     </button>
