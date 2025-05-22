@@ -44,9 +44,14 @@
 //     primary: '#2563eb'
 //   }
 // })
+import { existsSync } from 'node:fs'
+
 export default defineNuxtConfig({
   modules: ['@nuxt/content', '@nuxtjs/tailwindcss', '@nuxtjs/color-mode'],
-  css: ['katex/dist/katex.min.css'],
+  css: [
+    '~/assets/css/tailwind.css',
+    ...(existsSync('node_modules/katex/dist/katex.min.css') ? ['katex/dist/katex.min.css'] : [])
+  ],
   content: {
      documentDriven: true,
      highlight: {
