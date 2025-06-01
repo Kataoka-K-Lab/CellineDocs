@@ -26,6 +26,13 @@
   .dark .prose thead th { @apply font-semibold bg-zinc-800; }
   .dark .prose tbody tr:last-child td { border-bottom-width: 0; }
 }
+@layer components {
+  /* kbd タグの共通スタイル */
+  kbd {
+    @apply rounded border px-1 py-0.5 text-[10px] font-mono
+           border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-700;
+  }
+}
 
 /* ───────────────────── KaTeX 調整 ───────────────────── */
 .prose .katex-display {

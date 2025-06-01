@@ -21,7 +21,15 @@ const open = ref(false)
           class="fixed inset-y-0 left-0 z-40 w-64 bg-white dark:bg-zinc-900
                  border-r border-zinc-200 dark:border-zinc-800
                  p-6 overflow-y-auto lg:hidden">
+        <div class="sticky top-0 p-6 space-y-7">
+          <NuxtLink to="/" class="flex items-center gap-2">
+            <img src="/celline_icon.png"
+                alt="Celline"
+                class="h-auto w-30 dark:invert" />
+          </NuxtLink>
+          <NavSearch />
           <SidebarNavigation :items="navigation" @click="open = false" />
+        </div>
         </aside>
       </transition>
 
@@ -29,7 +37,13 @@ const open = ref(false)
       <aside class="hidden lg:block w-72 shrink-0 border-r
                     border-zinc-200 dark:border-zinc-800
                     bg-white dark:bg-zinc-900">
-        <div class="sticky top-0 p-6">
+        <div class="sticky top-0 p-6 space-y-7">
+          <NuxtLink to="/" class="flex items-center gap-2">
+            <img src="/celline_icon.png"
+                alt="Celline"
+                class="h-auto w-30 dark:invert" />
+          </NuxtLink>
+          <NavSearch />
           <SidebarNavigation :items="navigation" />
         </div>
       </aside>
@@ -40,7 +54,6 @@ const open = ref(false)
           class="sticky top-0 z-30 flex items-center gap-3
                  bg-white/90 dark:bg-zinc-900/90 backdrop-blur
                  border-b border-zinc-200 dark:border-zinc-800 px-4 py-3">
-
           <!-- ハンバーガー：lg 以上で非表示 -->
           <button
             class="lg:hidden h-10 w-10 flex items-center justify-center rounded-md
@@ -56,6 +69,7 @@ const open = ref(false)
           <span class="text-zinc-400">/</span>
           <span class="font-medium truncate">{{ page?.title || 'Docs' }}</span>
 
+          <DownloadPdfButton />
 
         </header>
 
