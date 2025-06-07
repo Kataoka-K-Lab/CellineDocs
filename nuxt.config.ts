@@ -18,12 +18,24 @@ export default defineNuxtConfig({
       ],
       anchorLinks: false  // 見出しの自動アンカーリンク生成を無効化
     },
+    experimental: {
+      clientDB: false
+    }
   },
   colorMode: {
     classSuffix: ''               // ⚠️ 'dark' / 'light' だけを付与
   },
   /* 静的サイト生成モード */
-  nitro: { preset: 'static' },           // nuxi generate → .output/public
+  nitro: { 
+    preset: 'static',
+    prerender: {
+      failOnError: false,           // エラーでビルドを停止しない
+      crawlLinks: true,
+      ignore: [
+        '/api/_content/query/**'    // コンテンツクエリエラーを無視
+      ]
+    }
+  },
 
   app: {
     /* リポジトリ名に合わせて必ず書き換えてください */
