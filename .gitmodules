@@ -1,0 +1,3 @@
+[submodule "libs/Celline"]
+	path = libs/Celline
+	url = git@github.com:Kataoka-K-Lab/Celline.git
