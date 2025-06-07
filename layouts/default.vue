@@ -77,6 +77,9 @@ const open = ref(false)
           <slot />
         </article>
       </main>
+      
+      <!-- Table of Contents (only on larger screens) -->
+      <TableOfContents />
     </div>
     <ColorModeToggle />
   </ContentNavigation>

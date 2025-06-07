@@ -8,13 +8,15 @@ export default defineNuxtConfig({
         default: 'github-dark',
         dark: 'github-dark'
       },
-      preload: ['js','ts','vue','bash', 'python']
+      preload: ['js','ts','vue','bash', 'python', 'mermaid']
     },
     markdown: {
       remarkPlugins: ['remark-math'],
       rehypePlugins: [
-        ['rehype-katex', { output: 'html', strict: false }]
-      ]
+        ['rehype-katex', { output: 'html', strict: false }],
+        ['rehype-mermaid', { strategy: 'img-svg' }]
+      ],
+      anchorLinks: false  // 見出しの自動アンカーリンク生成を無効化
     },
   },
   colorMode: {

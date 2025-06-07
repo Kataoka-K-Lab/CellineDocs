@@ -39,3 +39,44 @@
   margin: 1.5rem 0;
   overflow-x: auto;
 }
+
+/* ───────────────────── 見出しのリンクスタイルを削除 ───────────────────── */
+@layer components {
+  /* 見出し内のアンカーリンクのスタイルをリセット */
+  .prose h1 a,
+  .prose h2 a,
+  .prose h3 a,
+  .prose h4 a,
+  .prose h5 a,
+  .prose h6 a {
+    @apply no-underline;
+    text-decoration: none !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+    font-size: inherit !important;
+    font-family: inherit !important;
+  }
+
+  /* ホバー時もリンクスタイルを表示しない */
+  .prose h1 a:hover,
+  .prose h2 a:hover,
+  .prose h3 a:hover,
+  .prose h4 a:hover,
+  .prose h5 a:hover,
+  .prose h6 a:hover {
+    @apply no-underline;
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+
+  /* フォーカス時のアクセシビリティは保持 */
+  .prose h1 a:focus,
+  .prose h2 a:focus,
+  .prose h3 a:focus,
+  .prose h4 a:focus,
+  .prose h5 a:focus,
+  .prose h6 a:focus {
+    @apply outline-2 outline-blue-500 outline-offset-2;
+    outline-style: solid;
+  }
+}
